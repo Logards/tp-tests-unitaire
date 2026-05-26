@@ -28,3 +28,12 @@ jobs:
         with:
           name: jacoco-report
           path: build/reports/jacoco/test/html/
+
+      - name: Mutation testing with Pitest
+        run: ./gradlew pitest
+
+      - name: Upload Pitest report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pitest-report
+          path: build/reports/pitest/

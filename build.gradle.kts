@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     id("io.kotest") version "6.1.11"
     id("jacoco")
+    id("info.solidsoft.pitest") version "1.9.11"
 }
 
 group = "com.example"
@@ -37,6 +38,12 @@ kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict")
     }
+}
+pitest {
+    testPlugin.set("junit5")
+    junit5PluginVersion.set("1.2.2")
+    targetClasses.set(setOf("com.example.tptestsunitaires.*"))
+    pitestVersion.set("1.19.1")
 }
 
 tasks.jacocoTestReport {
