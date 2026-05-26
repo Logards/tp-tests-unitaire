@@ -43,14 +43,7 @@ pitest {
     testPlugin.set("junit5")
     junit5PluginVersion.set("1.2.2")
     targetClasses.set(setOf("com.example.tptestsunitaires.*"))
-    pitestVersion.set("1.19.1")
-}
-
-tasks.jacocoTestReport {
-    dependsOn(tasks.test) // tests are required to run before generating the report
-    reports {
-        xml.required.set(true)
-    }
+    pitestVersion.set("1.19.11")
 }
 
 tasks.withType<Test> {
