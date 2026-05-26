@@ -23,6 +23,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    testImplementation("io.mockk:mockk:1.14.9")
     testImplementation("io.kotest:kotest-assertions-core:6.1.11")
     testImplementation("io.kotest:kotest-property:6.1.11")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
