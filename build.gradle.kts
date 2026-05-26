@@ -29,6 +29,7 @@ dependencies {
     testImplementation("io.kotest:kotest-property:6.1.11")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("io.kotest:kotest-runner-junit5:6.1.11")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

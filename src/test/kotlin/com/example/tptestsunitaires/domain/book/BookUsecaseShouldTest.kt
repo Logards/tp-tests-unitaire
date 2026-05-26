@@ -3,7 +3,6 @@ package com.example.tptestsunitaires.domain.book
 import com.example.tptestsunitaires.domain.book.model.Book
 import com.example.tptestsunitaires.domain.book.usecase.BookUseCase
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.collections.shouldExistInOrder
 import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.arbitrary
@@ -11,10 +10,10 @@ import io.kotest.property.arbitrary.list
 import io.kotest.property.arbitrary.string
 import io.kotest.property.checkAll
 
-class BookUsecaseShould: FunSpec({
+class BookUsecaseShouldTest: FunSpec({
     test("add a book to the repository should add a book") {
         val book = Book("author1", "name1")
-        val fakeDb = FakeDbBook()
+        val fakeDb = FakeDbBookTest()
         val bookUsecase = BookUseCase(fakeDb)
 
         bookUsecase.addBook(book)
@@ -28,7 +27,7 @@ class BookUsecaseShould: FunSpec({
     test("add 2 book to the repository and return all books should return all books sorted") {
         val book = Book("author1", "name1")
         val book2 = Book("author2", "name2")
-        val fakeDb = FakeDbBook()
+        val fakeDb = FakeDbBookTest()
         val bookUseCase = BookUseCase(fakeDb)
 
         bookUseCase.addBook(book)
@@ -47,7 +46,7 @@ class BookUsecaseShould: FunSpec({
             Book(author, title)
         }
         checkAll( Arb.list(bookArb, 5..20) ) { books ->
-            val fakeDb = FakeDbBook()
+            val fakeDb = FakeDbBookTest()
             val bookUseCase = BookUseCase(fakeDb)
 
             books.forEach { bookUseCase.addBook(it) }

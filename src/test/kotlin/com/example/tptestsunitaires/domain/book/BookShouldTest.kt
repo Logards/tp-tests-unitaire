@@ -5,7 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
-class BookShould: FunSpec( {
+class BookShouldTest: FunSpec( {
     test("create a book with an empty string should return an exception") {
         val exception = shouldThrow<IllegalArgumentException> {
             val book = Book("", "book")
