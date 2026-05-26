@@ -44,10 +44,11 @@ tasks.withType<Test> {
 }
 
 tasks.jacocoTestCoverageVerification {
+    dependsOn(tasks.jacocoTestReport) // attend que le rapport soit généré
     violationRules {
         rule {
             limit {
-                minimum = "0.8".toBigDecimal()
+                minimum = "0.80".toBigDecimal()
             }
         }
     }
