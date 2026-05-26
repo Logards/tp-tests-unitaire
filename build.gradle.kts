@@ -38,13 +38,7 @@ kotlin {
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-    finalizedBy(tasks.jacocoTestReport, tasks.jacocoTestCoverageVerification)
-}
-
 tasks.jacocoTestCoverageVerification {
-    dependsOn(tasks.jacocoTestReport) // attend que le rapport soit généré
     violationRules {
         rule {
             limit {
@@ -52,4 +46,9 @@ tasks.jacocoTestCoverageVerification {
             }
         }
     }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport, tasks.jacocoTestCoverageVerification)
 }
