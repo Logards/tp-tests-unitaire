@@ -3,6 +3,7 @@ package com.example.tptestsunitaires.domain.book
 import com.example.tptestsunitaires.domain.book.model.Book
 import com.example.tptestsunitaires.domain.book.usecase.BookUseCase
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldExistInOrder
 import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.arbitrary
