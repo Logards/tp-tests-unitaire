@@ -76,7 +76,7 @@ pitest {
     testPlugin.set("junit5")
     junit5PluginVersion.set("1.2.2")
     targetClasses.set(setOf("com.example.tptestsunitaires.*"))
-    pitestVersion.set("1.19.11")
+    pitestVersion.set("1.25.4")
 }
 
 tasks.test {
