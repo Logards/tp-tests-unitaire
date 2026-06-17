@@ -29,6 +29,16 @@ jobs:
           name: jacoco-report
           path: build/reports/jacoco/test/html/
 
+      - name: Run component tests
+        run: ./gradlew testComponent
+
+      - name: Upload component test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: component-test-report
+          path: build/reports/tests/testComponent/
+
       - name: Mutation testing with Pitest
         run: ./gradlew pitest
 
