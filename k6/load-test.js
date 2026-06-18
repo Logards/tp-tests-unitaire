@@ -2,8 +2,25 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 
 export const options = {
-  vus: 5,              // 5 virtual users
-  duration: '5s',      // run for 5 seconds
+    "discardResponseBodies": true,
+      "scenarios": {
+    "api_endpoints_config": {
+      "executor": "constant-arrival-rate",
+          "rate": 50,
+          "duration": "10s",
+          "preAllocatedVUs": 5,
+          "maxVUs": 100,
+          "exec": "test_api_endpoints_config"
+    }
+  },
+    "thresholds": {
+    "failed requests": [
+      "rate<0.01"
+    ],
+        "http_req_duration{scenario:test_api_endpoints_config}": [
+      "p(95)<50"
+    ]
+  }
 };
 
 export default function () {
