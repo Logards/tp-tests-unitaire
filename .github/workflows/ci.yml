@@ -17,6 +17,9 @@ jobs:
           distribution: 'temurin'
           java-version: '24'
 
+      - name: Run Detekt linter
+        run: ./gradlew detekt
+
       - name: Build with Gradle
         run: ./gradlew build
 

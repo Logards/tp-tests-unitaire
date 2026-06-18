@@ -6,6 +6,7 @@ plugins {
     id("io.kotest") version "6.1.11"
     id("jacoco")
     id("info.solidsoft.pitest") version "1.9.11"
+    id("io.gitlab.arturbosch.detekt") version "1.23.8"
 }
 
 group = "com.example"
@@ -160,6 +161,29 @@ tasks.jacocoTestCoverageVerification {
             limit {
                 minimum = "0.5".toBigDecimal()
             }
+        }
+    }
+}
+
+detekt {
+    toolVersion = "1.23.8"
+    config.setFrom(file("config/detekt.yml"))
+    buildUponDefaultConfig = true
+}
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    reports {
+        html.required.set(true)
+        xml.required.set(true)
+        txt.required.set(false)
+        sarif.required.set(true)
+    }
+}
+
+configurations.matching { it.name.startsWith("detekt") }.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin") {
+            useVersion("2.0.21")
         }
     }
 }
