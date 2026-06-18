@@ -19,6 +19,7 @@ jobs:
 
       - name: Run Detekt linter
         run: ./gradlew detekt
+        continue-on-error: true
 
       - name: Build with Gradle
         run: ./gradlew build

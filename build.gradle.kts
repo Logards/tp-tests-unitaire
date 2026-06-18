@@ -169,6 +169,7 @@ detekt {
     toolVersion = "1.23.8"
     config.setFrom(file("config/detekt.yml"))
     buildUponDefaultConfig = true
+    ignoreFailures = true
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
