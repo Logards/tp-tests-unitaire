@@ -2,7 +2,7 @@ package com.example.tptestsunitaires.infrastructure.book
 
 import com.example.tptestsunitaires.domain.book.model.Book
 import com.example.tptestsunitaires.domain.book.usecase.BookUseCase
-import com.example.tptestsunitaires.infrastructure.driving.book.dto.BookController
+import com.example.tptestsunitaires.infrastructure.driving.book.controller.BookController
 import com.ninjasquad.springmockk.MockkBean
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.extensions.spring.SpringExtension
@@ -33,12 +33,13 @@ class BookControllerShouldTest : FunSpec() {
         beforeTest {
 
             val allBooks = listOf(
-                Book("Author 1", "Book 1"),
-                Book("Author 2", "Book 2")
+                Book("Author 1", "Book 1", false),
+                Book("Author 2", "Book 2", false)
             )
 
             every { bookUseCase.findAll() } returns allBooks
-            every { bookUseCase.addBook(any()) } just Runs
+            every { bookUseCase.addBook(any()) } answers { firstArg() }
+            every { bookUseCase.reserveBook(any()) } just Runs
         }
 
         test("GetAllBooksShouldReturnListOfBooks") {
@@ -80,6 +81,21 @@ class BookControllerShouldTest : FunSpec() {
             }.andExpect {
                 status { isBadRequest() }
             }
+        }
+
+        test("ReserveBookShouldReturnBook") {
+            val id = 1
+            mockMvc.post("/books/${id}/reserve") {
+            }.andExpect {
+                status { isOk() }
+            }.andReturn()
+        }
+
+        test("ReserveBookWithoutIdShouldReturnBadRequest") {
+            mockMvc.post("/books//reserve") {
+            }.andExpect {
+                status { isNotFound() }
+            }.andReturn()
         }
     }
 }

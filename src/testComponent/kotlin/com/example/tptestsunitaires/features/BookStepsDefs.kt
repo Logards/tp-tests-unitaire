@@ -88,8 +88,10 @@ class BookStepsDefs() {
             BookDTO(name = name, author = author)
         }
 
+        val actualBooks = allDatas.map { BookDTO(name = it.name, author = it.author) }
+
         expectedBooks.forEach { expected ->
-            allDatas shouldContain expected
+            actualBooks shouldContain expected
         }
     }
 }

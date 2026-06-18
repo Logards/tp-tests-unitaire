@@ -6,15 +6,19 @@ class BookMapping {
     companion object {
         fun toDTO(book: Book): BookDTO {
             return BookDTO(
+                id = book.id,
                 author = book.author,
-                name = book.name
+                name = book.name,
+                isReserved = book.isReserved
             )
         }
 
         fun toModel(book: BookDTO): Book {
             return Book(
+                id = book.id,
                 author = book.author,
-                name = book.name
+                name = book.name,
+                isReserved = book.isReserved ?: false,
             )
         }
     }

@@ -1,6 +1,13 @@
 package com.example.tptestsunitaires.infrastructure.driving.book.dto
 
-data class BookDTO (
+import com.fasterxml.jackson.annotation.JsonAlias
+import com.fasterxml.jackson.annotation.JsonProperty
+
+data class BookDTO(
+    val id: Long? = null,
     val author: String,
-    val name: String
+    val name: String,
+    @get:JsonProperty("isReserved")
+    @param:JsonAlias("reserved")
+    val isReserved: Boolean? = null
 )

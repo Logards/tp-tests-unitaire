@@ -1,6 +1,6 @@
 package com.example.tptestsunitaires.infrastructure.book
 
-import com.example.tptestsunitaires.infrastructure.driving.book.dto.BookDAO
+import com.example.tptestsunitaires.infrastructure.driving.book.postgres.BookDAO
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
@@ -46,6 +46,17 @@ class BookDAOShouldTest(val bookDAO: BookDAO, val namedParameterJdbcTemplate: Na
             allBooks.size shouldBe 1
             allBooks[0].author shouldBe "Author 3"
             allBooks[0].name shouldBe "Book 3"
+        }
+
+        test("reserved a book should set isReserved true") {
+            namedParameterJdbcTemplate.update(
+                "INSERT INTO books (author, name) VALUES (:author, :name)",
+                mapOf("author" to "Author 4", "name" to "Book 4")
+            )
+            val insertedBook = bookDAO.findAll()[0]
+            bookDAO.reserveBook(insertedBook.id!!)
+            val book = bookDAO.findAll()[0]
+            book.isReserved shouldBe true
         }
 
         afterSpec {

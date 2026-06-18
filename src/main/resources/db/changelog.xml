@@ -6,12 +6,22 @@
 
         <changeSet id="1" author="liquibase">
             <createTable tableName="books">
+                <column name="id" type="BIGINT" autoIncrement="true">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
                 <column name="author" type="varchar(255)">
                     <constraints nullable="false"/>
                 </column>
                 <column name="name" type="varchar(255)">
                     <constraints nullable="false"/>
                 </column>
+                <column name="isReserved" type="boolean">
+                    <constraints nullable="false"/>
+                </column>
             </createTable>
+        </changeSet>
+
+        <changeSet id="2" author="liquibase">
+            <addDefaultValue tableName="books" columnName="isReserved" defaultValueBoolean="false"/>
         </changeSet>
 </databaseChangeLog>
